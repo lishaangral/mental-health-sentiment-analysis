@@ -23,14 +23,9 @@ thought = st.Page("pages/thought_input.py", title="Thoughts Check-in", icon="�
 pg = st.navigation([dashboard, monitor, notif, sentiment, thought])
 pg.run()
 
-st.set_page_config(page_title="Mental Health Sentiment Analysis", page_icon="🏠")
+st.divider()
 
-st.divide()
-
-st.title("🌿 Mental Health Sentiment Monitor")
-
-# Logo or image
-st.image("https://cdn.pixabay.com/photo/2020/11/13/17/19/mental-health-5730712_1280.png", width=800, use_column_width="auto")
+st.title("🌿 Mental Health Sentiment Analysis")
 
 st.success("✅ Helping you stay emotionally aware, one screen at a time.")
 
