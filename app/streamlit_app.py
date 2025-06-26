@@ -33,7 +33,7 @@ st.success("✅ Helping you stay emotionally aware, one screen at a time.")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.header("How It Works")
+    st.header("How It Works?")
     st.markdown("""
     This app continuously **monitors emotional sentiment** by analyzing on-screen text from web-applications **you choose**.
 
@@ -44,7 +44,7 @@ with col1:
 
     st.info("🔐 **Your privacy is our top priority.** All data is stored locally. Nothing is uploaded, ever.")
 
-    st.header("🛠️ Personalize Your Experience")
+    st.header("Personalize Your Experience.")
     st.markdown("""
     Use the **left sidebar** to:
     - Enable or disable screen monitoring
@@ -52,10 +52,12 @@ with col1:
     - Toggle alerts for emotional triggers and daily check-ins
     - View real-time analytics in your **Dashboard**
     - Try calming tools in the **Sentiment Control** tab
+                
+    Note: Screen monitoring and related features will only work if you clone the repo and follow instructions given in README file.
     """)
 
 with col2:
-    st.header("What You Get")
+    st.header("What You Get?")
     st.markdown("#### **24/7 Emotional Insights**")
     st.markdown("- Track mood swings and emotional trends")
     st.markdown("- Identify stressful environments or content patterns")
