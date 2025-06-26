@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from ..scripts.cleanup import cleanup_old_logs
+from .cleanup import cleanup_old_logs
 import json
 
 # Load user settings
