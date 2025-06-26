@@ -14,7 +14,7 @@ except:
 cleanup_old_logs(retention_days=retention_days)
 
 # Page navigation
-dashboard = st.Page("pages/dashboard.py", title="Dashboard", icon="📊", default=True)
+dashboard = st.Page("pages/dashboard.py", title="Dashboard", icon="📊")
 monitor = st.Page("pages/monitor_settings.py", title="Monitor Settings", icon="⚙️")
 notif = st.Page("pages/notification_settings.py", title="Notification Settings", icon="🔔")
 sentiment = st.Page("pages/sentiment_control.py", title="Sentiment Control", icon="🧘")
