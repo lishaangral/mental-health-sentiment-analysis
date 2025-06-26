@@ -33,6 +33,7 @@ st.success("✅ Helping you stay emotionally aware, one screen at a time.")
 col1, col2 = st.columns(2)
 
 with col1:
+    st.markdown("<div style='padding: 20px;'>", unsafe_allow_html=True)
     st.header("🧠 How It Works")
     st.markdown("""
     This app continuously **monitors emotional sentiment** by analyzing on-screen text from web-applications **you choose**.
@@ -53,8 +54,11 @@ with col1:
     - 📊 View real-time analytics in your **Dashboard**
     - 🌬️ Try calming tools in the **Sentiment Control** tab
     """)
+    st.markdown("</div>", unsafe_allow_html=True)
+
 
 with col2:
+    st.markdown("<div style='padding: 20px;'>", unsafe_allow_html=True)
     st.header("🌟 What You Get")
     st.markdown("#### 📈 **24/7 Emotional Insights**")
     st.markdown("- Track mood swings and emotional trends")
@@ -69,6 +73,7 @@ with col2:
     st.markdown("- Stay motivated with joyful feedback")
 
     st.success("💡 Great for students, remote workers, or anyone curious about their digital emotional wellbeing.")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
