@@ -1,22 +1,47 @@
 # Allows users to change notification settings
 
+
 import streamlit as st
 import json
 import os
 
 # file to store user preferences
-SETTINGS_FILE = "../data/user_settings.json"
+SETTINGS_FILE = os.path.join("..", "data", "user_settings.json")
+
 
 # load or initialize settings
 def load_settings():
-    if os.path.exists(SETTINGS_FILE):
-        with open(SETTINGS_FILE, "r") as f:
-            return json.load(f)
-    else:
-        return {
-            "enable_distress_alerts": True,
-            "enable_daily_reminder": True
+    default_settings = {
+        "enable_notifications": True,
+        "notification_interval": 30,  # in minutes
+        "enable_distress_alerts": False,  # <- Add this line
+        "channels": {
+            "email": False,
+            "desktop": True,
+            "sms": False
         }
+    }
+
+    os.makedirs(os.path.dirname(SETTINGS_FILE), exist_ok=True)
+
+    if not os.path.exists(SETTINGS_FILE):
+        save_settings(default_settings)
+        return default_settings
+
+    # Load and merge existing settings with defaults (to handle updates gracefully)
+    with open(SETTINGS_FILE, "r") as f:
+        current_settings = json.load(f)
+
+    # Add missing keys if settings file is old or partial
+    for key, val in default_settings.items():
+        if key not in current_settings:
+            current_settings[key] = val
+
+    save_settings(current_settings)  # Update with missing defaults
+    return current_settings
+
+
+settings = load_settings()
 
 def save_settings(settings):
     os.makedirs(os.path.dirname(SETTINGS_FILE), exist_ok=True)
