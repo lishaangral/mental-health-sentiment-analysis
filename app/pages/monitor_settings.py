@@ -3,7 +3,7 @@ import threading
 import os
 import json
 
-from screen_monitor import get_open_windows, start_monitoring
+from scripts.screen_monitor import get_open_windows, start_monitoring
 
 SETTINGS_FILE = "../data/user_settings.json"
 
