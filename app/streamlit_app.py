@@ -33,8 +33,7 @@ st.success("✅ Helping you stay emotionally aware, one screen at a time.")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("<div style='padding: 20px;'>", unsafe_allow_html=True)
-    st.header("🧠 How It Works")
+    st.header("How It Works")
     st.markdown("""
     This app continuously **monitors emotional sentiment** by analyzing on-screen text from web-applications **you choose**.
 
@@ -48,19 +47,16 @@ with col1:
     st.header("🛠️ Personalize Your Experience")
     st.markdown("""
     Use the **left sidebar** to:
-    - 🔍 Enable or disable screen monitoring
-    - 🛑 Pause sentiment tracking at any time
-    - 🔔 Toggle alerts for emotional triggers and daily check-ins
-    - 📊 View real-time analytics in your **Dashboard**
-    - 🌬️ Try calming tools in the **Sentiment Control** tab
+    - Enable or disable screen monitoring
+    - Pause sentiment tracking at any time
+    - Toggle alerts for emotional triggers and daily check-ins
+    - View real-time analytics in your **Dashboard**
+    - Try calming tools in the **Sentiment Control** tab
     """)
-    st.markdown("</div>", unsafe_allow_html=True)
-
 
 with col2:
-    st.markdown("<div style='padding: 20px;'>", unsafe_allow_html=True)
-    st.header("🌟 What You Get")
-    st.markdown("#### 📈 **24/7 Emotional Insights**")
+    st.header("What You Get")
+    st.markdown("#### **24/7 Emotional Insights**")
     st.markdown("- Track mood swings and emotional trends")
     st.markdown("- Identify stressful environments or content patterns")
 
@@ -68,12 +64,11 @@ with col2:
     st.markdown("- Be notified when signs of stress, anxiety, or sadness are detected")
     st.markdown("- Prompted with relaxing activities when needed")
 
-    st.markdown("#### 🌈 **Positive Reinforcement**")
+    st.markdown("#### **Positive Reinforcement**")
     st.markdown("- Celebrate positive emotional spikes")
     st.markdown("- Stay motivated with joyful feedback")
 
     st.success("💡 Great for students, remote workers, or anyone curious about their digital emotional wellbeing.")
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
