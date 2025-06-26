@@ -36,6 +36,7 @@ if os.path.exists(log_file):
     show_raw = st.sidebar.checkbox("Show Raw Data")
 
     st.subheader("📈 Sentiment Trends Over Time")
+    labels = []
 
     if 'timestamp' not in df.columns:
         st.warning("⚠️ No 'timestamp' column found. Cannot plot trends.")
