@@ -39,8 +39,9 @@ with col1:
 # --------- Calming Sounds ----------
 with col2:
     st.subheader("🎧 Calming Sounds")
-    st.video("[🎵 Soothing Rain Sound (YouTube)](https://youtu.be/0dcFWLV_OlI?si=ewTyv1yipX7F8BhF)")
-    st.video("[🎵 Piano & Ocean Waves](https://www.youtube.com/watch?v=1ZYbU82GVz4)")
+    st.video("https://youtu.be/0dcFWLV_OlI?si=ewTyv1yipX7F8BhF", format="video/mp4")
+    st.video("https://www.youtube.com/watch?v=1ZYbU82GVz4")
+
     st.write("Relax with some **ambient nature sounds** to calm your thoughts.")
 
 # ---------- Divider ----------
