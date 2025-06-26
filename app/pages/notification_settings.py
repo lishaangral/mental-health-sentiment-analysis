@@ -1,11 +1,13 @@
+# Allows users to change notification settings
+
 import streamlit as st
 import json
 import os
 
-# File to store user preferences
+# file to store user preferences
 SETTINGS_FILE = "../data/user_settings.json"
 
-# Load or initialize settings
+# load or initialize settings
 def load_settings():
     if os.path.exists(SETTINGS_FILE):
         with open(SETTINGS_FILE, "r") as f:
@@ -23,7 +25,7 @@ def save_settings(settings):
 st.set_page_config(page_title="Notification Settings", layout="centered")
 st.title("Manage Your Notifications")
 
-# Load settings
+# load settings
 settings = load_settings()
 
 # UI toggles
@@ -31,12 +33,12 @@ st.subheader("Notification Preferences")
 settings["enable_distress_alerts"] = st.toggle("Alert me when signs of distress are detected", value=settings["enable_distress_alerts"])
 settings["enable_daily_reminder"] = st.toggle("Send me daily dashboard check-in notifications", value=settings["enable_daily_reminder"])
 
-# Save button
+# save button
 if st.button("Save Preferences"):
     save_settings(settings)
     st.success("Preferences saved successfully!")
 
-# Display current settings
+# display current settings
 st.markdown("---")
 st.write("### Current Settings")
 st.json(settings)

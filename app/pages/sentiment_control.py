@@ -5,8 +5,8 @@ st.set_page_config(page_title="Sentiment Control", layout="wide")
 st.title("🧘 Sentiment Control Hub")
 st.markdown("Feeling overwhelmed or low? Take a moment to try one of these proven mood-balancing resources.")
 
-# ---------------- Breathing Timer ----------------
-st.subheader("🌬️ Guided Breathing Timer")
+# In-app Breathing Timer
+st.subheader("Guided Breathing Timer")
 
 with st.expander("▶️ Start a 4-7-8 Breathing Cycle (Box Breathing)"):
     breath_phase = st.radio("Choose a phase to practice:", ["4-7-8 Breathing", "Box Breathing"])
@@ -24,10 +24,9 @@ with st.expander("▶️ Start a 4-7-8 Breathing Cycle (Box Breathing)"):
 
 st.divider()
 
-# ---------- Layout ----------
 col1, col2 = st.columns(2)
 
-# --------- Breathing Exercises ----------
+# suggestions for exercises
 with col1:
     st.subheader("🌬️ Breathing Exercises")
     st.video("https://www.youtube.com/watch?v=inpok4MKVLM", format="video/mp4")
@@ -36,19 +35,18 @@ with col1:
     st.video("https://youtu.be/lPJAtHWq08k?si=8zOWCxr_iPN_-1sP")
     st.write("Try these methods to improve focus and reduce anxiety.")
 
-# --------- Calming Sounds ----------
+# calming sounds
 with col2:
     st.subheader("🎧 Calming Sounds")
     st.video("https://youtu.be/0dcFWLV_OlI?si=ewTyv1yipX7F8BhF", format="video/mp4")
-    st.video("https://www.youtube.com/watch?v=1ZYbU82GVz4")
+    st.video("https://www.youtube.com/watch?v=1ZYbU82GVz4", format="video/mp4")
 
     st.write("Relax with some **ambient nature sounds** to calm your thoughts.")
 
-# ---------- Divider ----------
 st.divider()
 col3, col4 = st.columns(2)
 
-# --------- Distraction / Entertainment ----------
+# light entertainment
 with col3:
     st.subheader("🎬 Light-Hearted Distractions")
     st.video("https://youtu.be/WIPV1iwzrzg?si=ZB3AMIQoCFqF2_Q0", format="video/mp4")
