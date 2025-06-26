@@ -1,7 +1,7 @@
 # Allows users to enter text and recieve real time sentiment analysis
 
 import streamlit as st
-from scripts.predict_pipeline import analyze_text
+from predict_pipeline import analyze_text
 import datetime
 import json
 import os

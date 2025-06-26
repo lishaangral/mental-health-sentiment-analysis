@@ -5,8 +5,6 @@ from collections import defaultdict
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
-
-
 # load fine-tuned model and tokenizer
 sentiment_pipeline = pipeline(
     "text-classification",

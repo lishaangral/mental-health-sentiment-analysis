@@ -49,7 +49,7 @@ else:
 
 # --- Toggle for enabling/disabling monitoring ---
 st.markdown("---")
-st.subheader("🟢 Monitoring Toggle")
+st.subheader("Monitoring Toggle")
 monitor_toggle = st.toggle("Enable Monitoring", value=monitoring_enabled)
 
 if "monitoring" not in st.session_state:

@@ -34,7 +34,8 @@ if os.path.exists(log_file):
     st.subheader("🔍 Sentiment Score Trends")
     
     melt_cols = [col for col in df.columns if col not in ['timestamp', 'window', 'text', 'result']]
-    df_melted = df.melt(id_vars='timestamp', value_vars=melt_cols, var_name='Label', value_name='Score')
+    df_melted = df.melt(value_vars=melt_cols, var_name='Label', value_name='Score')
+
 
     line_chart = alt.Chart(df_melted).mark_line(point=True).encode(
         x='timestamp:T',
