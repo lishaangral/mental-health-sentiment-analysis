@@ -14,16 +14,16 @@ except:
 cleanup_old_logs(retention_days=retention_days)
 
 # Page navigation
-dashboard = st.Page("pages/dashboard.py", title="Dashboard", icon=":material/dashboard:", default=True)
-monitor = st.Page("pages/monitor_settings.py", title="Monitor Settings", icon=":material/settings:", default=True)
-notif = st.Page("pages/notification_settings.py", title="Notification Settings", icon=":material/notification:", default=True)
-sentiment = st.Page("pages/sentiment_control.py", title="Sentiment Control", icon=":material/emotion:", default=True)
-thought = st.Page("pages/thought_input.py", title="Thoughts Check-in", icon=":material/psychology:", default=True)
+dashboard = st.Page("pages/dashboard.py", title="Dashboard", icon="📊", default=True)
+monitor = st.Page("pages/monitor_settings.py", title="Monitor Settings", icon="⚙️", default=True)
+notif = st.Page("pages/notification_settings.py", title="Notification Settings", icon="🔔", default=True)
+sentiment = st.Page("pages/sentiment_control.py", title="Sentiment Control", icon="🧘", default=True)
+thought = st.Page("pages/thought_input.py", title="Thoughts Check-in", icon="💆", default=True)
 
 pg = st.navigation([dashboard, monitor, notif, sentiment, thought])
 pg.run()
 
-st.set_page_config(page_title="Mental Health Sentiment Analysis", page_icon=":material/edit:")
+st.set_page_config(page_title="Mental Health Sentiment Analysis", page_icon="🏠")
 st.title("🌿 Mental Health Sentiment Monitor")
 
 # Logo or image
