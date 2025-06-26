@@ -1,0 +1,15 @@
+streamlit
+pandas
+json
+os
+altair
+datetime
+threading
+time
+plyer
+transformers
+collections
+pytesseract
+pygetwindow
+PIL
+datasets
