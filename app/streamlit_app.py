@@ -24,6 +24,9 @@ pg = st.navigation([dashboard, monitor, notif, sentiment, thought])
 pg.run()
 
 st.set_page_config(page_title="Mental Health Sentiment Analysis", page_icon="🏠")
+
+st.divide()
+
 st.title("🌿 Mental Health Sentiment Monitor")
 
 # Logo or image
