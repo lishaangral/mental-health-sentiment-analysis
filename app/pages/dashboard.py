@@ -32,9 +32,17 @@ if os.path.exists(log_file):
     show_raw_data = st.sidebar.checkbox("Show Raw Logs Table", value=False)
 
     st.subheader("🔍 Sentiment Score Trends")
+
+    print("📋 Columns in df:", df.columns.tolist())
+
     
-    melt_cols = [col for col in df.columns if col not in ['timestamp', 'window', 'text', 'result']]
-    df_melted = df.melt(value_vars=melt_cols, var_name='Label', value_name='Score')
+    if 'timestamp' in df.columns:
+        melt_cols = [col for col in df.columns if col != 'timestamp']
+        df_melted = df.melt(id_vars='timestamp', value_vars=melt_cols, var_name='Label', value_name='Score')
+    else:
+        st.warning("⚠️ 'timestamp' column not found in dataframe. Cannot plot sentiment trends.")
+        df_melted = pd.DataFrame()
+
 
 
     line_chart = alt.Chart(df_melted).mark_line(point=True).encode(
