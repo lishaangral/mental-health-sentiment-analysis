@@ -4,6 +4,8 @@ A privacy-focused, real-time screen sentiment monitoring tool that uses **OCR + 
 
 ![Mental Health Sentiment Monitor](https://user-images.githubusercontent.com/your-image-link.png)
 
+![Fine Tuned RoBERTa model deloyed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
+
 ---
 
 ## 📑 Index

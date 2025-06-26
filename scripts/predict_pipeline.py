@@ -2,12 +2,16 @@
 
 from transformers import pipeline
 from collections import defaultdict
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+
+
 
 # load fine-tuned model and tokenizer
 sentiment_pipeline = pipeline(
     "text-classification",
-    model="../models/roberta-mental-health",
-    tokenizer="../models/roberta-mental-health",
+    model = AutoModelForSequenceClassification.from_pretrained("lishaangral/roberta-mental-health"),
+    tokenizer = AutoTokenizer.from_pretrained("lishaangral/roberta-mental-health"),
     truncation=True,
     top_k=None
 )
