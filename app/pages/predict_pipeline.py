@@ -13,12 +13,13 @@ sentiment_pipeline = pipeline(
     truncation=True,
     top_k=None
 )
+from collections import defaultdict
 
 def analyze_text(text, max_length=512, stride=256):
     tokenizer = sentiment_pipeline.tokenizer
     model = sentiment_pipeline.model
 
-    # tokenize and chunk input text
+    # Tokenize and chunk input text
     tokens = tokenizer(text, return_tensors='pt', truncation=False)['input_ids'][0]
     chunks = [tokens[i:i + max_length] for i in range(0, len(tokens), stride)]
 
@@ -26,15 +27,20 @@ def analyze_text(text, max_length=512, stride=256):
     results = []
 
     for chunk in chunks:
-        decoded = tokenizer.decode(chunk)
-        chunk_results = sentiment_pipeline(decoded)
-        for result in chunk_results:
+        decoded = tokenizer.decode(chunk, skip_special_tokens=True)
+
+        # Get prediction
+        chunk_result = sentiment_pipeline(decoded)
+
+        # Handle case where result is a list
+        if chunk_result and isinstance(chunk_result, list):
+            result = chunk_result[0]  # Get top result
             label = result['label']
             score = result['score']
             label_scores[label] += score
             results.append({"chunk": decoded[:100], "label": label, "score": score})
 
-    # sort by score
+    # Sort aggregated label scores
     sorted_labels = sorted(label_scores.items(), key=lambda x: x[1], reverse=True)
 
     return {
