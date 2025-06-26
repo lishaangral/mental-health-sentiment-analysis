@@ -33,17 +33,15 @@ with col1:
     st.video("https://www.youtube.com/watch?v=inpok4MKVLM", format="video/mp4")
     st.write("A quick and effective **5-minute breathing exercise** to help you reset your nervous system.")
 
-    st.video("https://www.youtube.com/watch?v=8lB59zuw6Wk")
-    st.write("Try this **box breathing technique** to improve focus and reduce anxiety.")
+    st.video("https://youtu.be/lPJAtHWq08k?si=8zOWCxr_iPN_-1sP")
+    st.write("Try these methods to improve focus and reduce anxiety.")
 
 # --------- Calming Sounds ----------
 with col2:
     st.subheader("🎧 Calming Sounds")
-    st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", format="audio/mp3")
+    st.video("[🎵 Soothing Rain Sound (YouTube)](https://youtu.be/0dcFWLV_OlI?si=ewTyv1yipX7F8BhF)")
+    st.video("[🎵 Piano & Ocean Waves](https://www.youtube.com/watch?v=1ZYbU82GVz4)")
     st.write("Relax with some **ambient nature sounds** to calm your thoughts.")
-
-    st.markdown("[🎵 Soothing Rain Sound (YouTube)](https://www.youtube.com/watch?v=e6j6iEbKXkM)")
-    st.markdown("[🎵 Piano & Ocean Waves](https://www.youtube.com/watch?v=1ZYbU82GVz4)")
 
 # ---------- Divider ----------
 st.divider()
@@ -52,22 +50,18 @@ col3, col4 = st.columns(2)
 # --------- Distraction / Entertainment ----------
 with col3:
     st.subheader("🎬 Light-Hearted Distractions")
-    st.video("https://www.youtube.com/watch?v=3eTOcrWuQ9M", format="video/mp4")
+    st.video("https://youtu.be/WIPV1iwzrzg?si=ZB3AMIQoCFqF2_Q0", format="video/mp4")
     st.caption("Pixar Short: Piper")
 
-    st.video("https://www.youtube.com/watch?v=hzfH9aaKmmc", format="video/mp4")
+    st.video("https://youtu.be/_d4zSb3OR7g?si=Dtu8QzX0VJMVYuxA", format="video/mp4")
     st.caption("Funny Animal Compilation")
-
-    st.video("https://www.youtube.com/embed/videoseries?list=PLhSp9OSVmeyKQ3vMWVRPLdK6zVP7P-7jV")
-    st.caption("Positive News Highlights Playlist")
 
 with col4:
     st.subheader("🧠 Mindfulness & Refocus")
 
     st.video("https://www.youtube.com/watch?v=wGFog-OuFDM", format="video/mp4")
     st.caption("Mindfulness Bell Timer")
-
-    st.markdown("🌳 [Headspace Guide to Meditation (Netflix)](https://www.netflix.com/title/81280926)")
+    # st.markdown("🌳 [Headspace Guide to Meditation (Netflix)](https://www.netflix.com/title/81280926)")
     st.markdown("🧘 [Calm App - Meditations, Sleep, Focus](https://www.calm.com)")
 
 st.markdown("---")
