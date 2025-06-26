@@ -21,6 +21,7 @@ sentiment = st.Page("pages/sentiment_control.py", title="Sentiment Control", ico
 thought = st.Page("pages/thought_input.py", title="Thoughts Check-in", icon="💆")
 
 pg = st.navigation([dashboard, monitor, notif, sentiment, thought])
+pg.run()
 
 st.divider()
 
