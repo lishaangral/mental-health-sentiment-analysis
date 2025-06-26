@@ -7,7 +7,7 @@ from PIL import ImageGrab
 import json
 import time
 
-from ....scripts.predict_pipeline import analyze_text
+from ...scripts.predict_pipeline import analyze_text
 
 log_file = "../data/prediction_log.jsonl"
 

@@ -8,7 +8,7 @@ from screen_monitor import get_open_windows, start_monitoring
 SETTINGS_FILE = "../data/user_settings.json"
 
 st.set_page_config(page_title="Monitor Settings", layout="centered")
-st.title("🧭 Real-Time Monitor Settings")
+st.title("Real-Time Monitor Settings")
 
 # --- Load user preferences ---
 def load_user_settings():
@@ -30,7 +30,7 @@ monitoring_enabled = user_settings.get("monitoring_enabled", False)
 log_retention_days = user_settings.get("log_retention_days", 7)
 
 # --- App whitelist section ---
-st.subheader("🖥️ Select Applications to Monitor")
+st.subheader("Select Applications to Monitor")
 
 windows = get_open_windows()
 if not windows:
