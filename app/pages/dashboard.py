@@ -3,76 +3,80 @@ import pandas as pd
 import json
 import os
 import altair as alt
-from datetime import datetime
 
 st.set_page_config(page_title="Mental Health Dashboard", layout="wide")
 st.title("📊 Mental Health Sentiment Monitoring Dashboard")
 
 log_file = "data/prediction_log.jsonl"
 
-# Helper to parse and structure data
-def load_logs(log_file):
-    with open(log_file) as f:
-        logs = [json.loads(line) for line in f]
-
-    for log in logs:
-        log['timestamp'] = pd.to_datetime(log['timestamp'])
-        result = log.get("result", {})
-        if isinstance(result, list):
-            for entry in result:
-                log[entry['label']] = entry['score']
-        elif isinstance(result, dict):
-            log[result['label']] = result['score']
+# Load and format logs
+def load_logs(filepath):
+    logs = []
+    with open(filepath) as f:
+        for line in f:
+            try:
+                log = json.loads(line)
+                log["timestamp"] = pd.to_datetime(log.get("timestamp", pd.NaT))
+                result = log.get("result", {})
+                if isinstance(result, list):
+                    for entry in result:
+                        log[entry['label']] = entry['score']
+                elif isinstance(result, dict):
+                    log[result['label']] = result['score']
+                logs.append(log)
+            except json.JSONDecodeError:
+                continue
     return pd.DataFrame(logs)
 
+# Check for logs
 if os.path.exists(log_file):
     df = load_logs(log_file)
 
-    st.sidebar.header("📌 Preferences")
-    show_raw_data = st.sidebar.checkbox("Show Raw Logs Table", value=False)
+    st.sidebar.header("⚙️ Settings")
+    show_raw = st.sidebar.checkbox("Show Raw Data")
 
-    st.subheader("🔍 Sentiment Score Trends")
+    st.subheader("📈 Sentiment Trends Over Time")
 
-    print("📋 Columns in df:", df.columns.tolist())
-
-    
-    if 'timestamp' in df.columns:
-        melt_cols = [col for col in df.columns if col != 'timestamp']
-        df_melted = df.melt(id_vars='timestamp', value_vars=melt_cols, var_name='Label', value_name='Score')
+    if 'timestamp' not in df.columns:
+        st.warning("⚠️ No 'timestamp' column found. Cannot plot trends.")
     else:
-        st.warning("⚠️ 'timestamp' column not found in dataframe. Cannot plot sentiment trends.")
-        df_melted = pd.DataFrame()
+        labels = [col for col in df.columns if col not in ['timestamp', 'text', 'window', 'result']]
+        if labels:
+            for label in labels:
+                line = alt.Chart(df).mark_line(point=True).encode(
+                    x='timestamp:T',
+                    y=alt.Y(label, scale=alt.Scale(domain=[0, 1])),
+                    tooltip=['timestamp:T', label]
+                ).properties(title=f"Sentiment Score for '{label}'", height=250)
+                st.altair_chart(line, use_container_width=True)
+        else:
+            st.warning("No sentiment labels found to display.")
 
+    st.subheader("📌 Score Summary")
+    if labels:
+        summary = df[labels].agg(['mean', 'max']).T.reset_index()
+        summary.columns = ['Label', 'Average Score', 'Max Score']
+        st.dataframe(summary.style.format("{:.2f}"))
+    else:
+        st.info("No scores available to summarize.")
 
-
-    line_chart = alt.Chart(df_melted).mark_line(point=True).encode(
-        x='timestamp:T',
-        y='Score:Q',
-        color='Label:N',
-        tooltip=['timestamp:T', 'Label:N', 'Score:Q']
-    ).interactive().properties(width=1000, height=400)
-
-    st.altair_chart(line_chart, use_container_width=True)
-
-    st.subheader("📌 Metrics Overview")
-    metrics = df_melted.groupby("Label")['Score'].agg(['mean', 'max']).reset_index()
-    metrics.columns = ['Label', 'Average Score', 'Max Score']
-    st.dataframe(metrics.style.format("{:.2f}"))
-
-    st.subheader("📒 Key Insights")
+    st.subheader("💡 Insight Highlights")
     insights = []
-    if any((df[label] > 0.8).sum() > 2 for label in melt_cols if "negative" in label.lower()):
-        insights.append("🚨 **Frequent high-negative sentiment detected. Consider taking breaks or exploring calming exercises.**")
-    if any((df[label] > 0.85).sum() > 3 for label in melt_cols if "positive" in label.lower() or "happy" in label.lower()):
-        insights.append("😊 **You’ve shown strong positive sentiment recently. Great job maintaining balance!**")
-    if not insights:
-        insights.append("📈 **No significant emotional spikes. You're maintaining a steady emotional state.**")
+    for label in labels:
+        if df[label].gt(0.8).sum() >= 3 and "neg" in label.lower():
+            insights.append(f"🚨 High negative sentiment detected in **{label}**.")
+        elif df[label].gt(0.85).sum() >= 3 and "pos" in label.lower():
+            insights.append(f"😊 Positive sentiment trend in **{label}** looks great!")
 
-    for insight in insights:
-        st.markdown(insight)
+    if insights:
+        for note in insights:
+            st.markdown(note)
+    else:
+        st.markdown("📊 You're maintaining a steady emotional profile.")
 
-    if show_raw_data:
-        st.subheader("📜 Raw Log Entries")
-        st.dataframe(df[['timestamp', 'window', 'text'] + melt_cols])
+    if show_raw:
+        st.subheader("🧾 Raw Logs")
+        display_cols = ['timestamp', 'window', 'text'] + labels
+        st.dataframe(df[display_cols], use_container_width=True)
 else:
-    st.warning("No logs found. Please run the monitoring script first.")
+    st.warning("No prediction logs found. Run the sentiment monitor to collect data.")
