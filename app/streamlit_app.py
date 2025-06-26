@@ -21,7 +21,6 @@ sentiment = st.Page("pages/sentiment_control.py", title="Sentiment Control", ico
 thought = st.Page("pages/thought_input.py", title="Thoughts Check-in", icon="💆")
 
 pg = st.navigation([dashboard, monitor, notif, sentiment, thought])
-pg.run()
 
 st.divider()
 
@@ -70,8 +69,8 @@ with col2:
     st.markdown("- Celebrate positive emotional spikes")
     st.markdown("- Stay motivated with joyful feedback")
 
-    st.success("💡 Great for students, remote workers, or anyone curious about their digital emotional wellbeing.")
+    st.success("💡 Great for students, remote workers or anyone curious about their digital emotional wellbeing.")
 
 # Footer
 st.markdown("---")
-st.caption("Built with ❤️ using Streamlit, Transformers, and a vision for proactive mental health care.")
+st.caption("Built with ❤️ using Streamlit, Transformers and a vision for proactive mental health care.")

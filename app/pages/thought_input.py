@@ -1,4 +1,4 @@
-# pages/thought_checkin.py
+# Allows users to enter text and recieve real time sentiment analysis
 
 import streamlit as st
 from scripts.predict_pipeline import analyze_text
@@ -10,7 +10,8 @@ SETTINGS_FILE = "../data/user_settings.json"
 LOG_FILE = "../data/prediction_log.jsonl"
 
 st.set_page_config(page_title="Thoughts Check-in", layout="centered")
-st.title("Write away what you feel and we'll help you analyse your thoughts.")
+st.title("Thoughts Check-in")
+st.header("Write away what you feel and we'll help you analyse your thoughts.")
 
 st.markdown("""
 This space is for you to express how you're feeling.
@@ -25,7 +26,7 @@ if st.button("Analyze My Thought") and user_input.strip():
     st.subheader("📊 Sentiment Analysis Result")
     st.write(result)
 
-    # Save to log
+    # save to log
     log = {
         "timestamp": datetime.datetime.now().isoformat(),
         "window": "Manual Input",
@@ -37,7 +38,7 @@ if st.button("Analyze My Thought") and user_input.strip():
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(log) + "\n")
 
-    # Display feedback
+    # sisplay feedback
     label = result.get("label", "").lower()
     score = result.get("score", 0)
 
