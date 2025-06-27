@@ -1,9 +1,5 @@
 streamlit>=1.34.0
 pandas
-altair
+pytorch
+tf-keras
 transformers
-datasets
-pytesseract
-pygetwindow
-Pillow
-plyer
