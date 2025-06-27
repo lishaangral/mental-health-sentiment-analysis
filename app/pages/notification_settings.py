@@ -6,7 +6,13 @@ import json
 import os
 
 # file to store user preferences
-SETTINGS_FILE = os.path.join("..", "data", "user_settings.json")
+SETTINGS_FILE = os.path.join(".", "data", "user_settings.json")
+
+
+def save_settings(settings):
+    os.makedirs(os.path.dirname(SETTINGS_FILE), exist_ok=True)
+    with open(SETTINGS_FILE, "w") as f:
+        json.dump(settings, f, indent=4)
 
 
 # load or initialize settings
@@ -42,12 +48,6 @@ def load_settings():
 
 
 settings = load_settings()
-
-def save_settings(settings):
-    os.makedirs(os.path.dirname(SETTINGS_FILE), exist_ok=True)
-    with open(SETTINGS_FILE, "w") as f:
-        json.dump(settings, f, indent=4)
-
 
 st.set_page_config(page_title="Notification Settings", layout="centered")
 st.title("Manage Your Notifications")

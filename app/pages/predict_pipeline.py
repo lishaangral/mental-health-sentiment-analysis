@@ -35,8 +35,8 @@ def analyze_text(text, max_length=512, stride=256):
         # Handle case where result is a list
         if chunk_result and isinstance(chunk_result, list):
             result = chunk_result[0]  # Get top result
-            label = result['label']
-            score = result['score']
+            label = result[0]
+            score = result[1]
             label_scores[label] += score
             results.append({"chunk": decoded[:100], "label": label, "score": score})
 

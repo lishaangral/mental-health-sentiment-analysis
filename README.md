@@ -2,9 +2,9 @@
 
 A privacy-focused, real-time screen sentiment monitoring tool that uses **OCR + RoBERTa Transformer** to detect emotional signals from your screen and helps you reflect, react and improve your mental well-being.
 
-![Mental Health Sentiment Monitor](https://user-images.githubusercontent.com/your-image-link.png)
+[Mental Health Sentiment Monitor](https://user-images.githubusercontent.com/your-image-link.png)
 
-![Fine Tuned RoBERTa model deloyed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
+[Fine Tuned RoBERTa model deloyed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
 
 ---
 

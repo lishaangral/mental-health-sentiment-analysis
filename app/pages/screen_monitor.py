@@ -9,7 +9,7 @@ import time
 
 from predict_pipeline import analyze_text
 
-log_file = "../data/prediction_log.jsonl"
+log_file = "./data/prediction_log.jsonl"
 
 def get_open_windows():
     return list(set([w.title for w in gw.getWindowsWithTitle("") if w.title.strip()]))

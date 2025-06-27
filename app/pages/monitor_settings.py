@@ -5,7 +5,7 @@ import json
 
 from screen_monitor import get_open_windows, start_monitoring
 
-SETTINGS_FILE = "../data/user_settings.json"
+SETTINGS_FILE = "./data/user_settings.json"
 
 st.set_page_config(page_title="Monitor Settings", layout="centered")
 st.title("Real-Time Monitor Settings")

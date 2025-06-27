@@ -7,7 +7,7 @@ import os
 import threading
 from plyer import notification
 
-PREDICTION_LOG_PATH = "../data/prediction_log.jsonl"
+PREDICTION_LOG_PATH = "./data/prediction_log.jsonl"
 
 # thresholds for triggering notifications
 DISTRESS_THRESHOLD = 0.8

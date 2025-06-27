@@ -6,8 +6,8 @@ import datetime
 import json
 import os
 
-SETTINGS_FILE = "../data/user_settings.json"
-LOG_FILE = "../data/prediction_log.jsonl"
+SETTINGS_FILE = "./data/user_settings.json"
+LOG_FILE = "./data/prediction_log.jsonl"
 
 st.set_page_config(page_title="Thoughts Check-in", layout="centered")
 st.title("Thoughts Check-in")
