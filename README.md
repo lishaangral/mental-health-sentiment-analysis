@@ -54,7 +54,7 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 
 ---
 
-### 🔄 How to Use
+### How to Use
 
 1. **Clone the repository**
 
@@ -104,20 +104,9 @@ Fine-tuned on:
 These sources provided diverse and labeled emotional data (stress, suicidal ideation, support-seeking, etc.) for supervised training.
 
 ---
+### Ethical Disclaimer
 
-## 🧾 License
-
-MIT License © 2025 \[Lisha Angral]
-
-
-
-
-
-
-
-### ⚠️ Ethical Disclaimer
-
-This application is developed for **educational, reflective, and non-clinical purposes only**.
+This demo of fine tuned model is developed for **educational, reflective, and non-clinical purposes only**.
 
 * It is **not a replacement** for professional diagnosis, therapy, or treatment.
 * Always consult a licensed mental health professional for serious or recurring symptoms.
@@ -127,5 +116,6 @@ This application is developed for **educational, reflective, and non-clinical pu
 > 💡 If you're in crisis or feeling unsafe, please contact a **mental health helpline** or **emergency services** immediately.
 
 ---
+## 🧾 License
 
-Let me know if you'd like this entire README exported to a `.md` file or want a PDF version for submission/documentation. I can also generate a logo, add example screenshots, or help you deploy it live on HuggingFace or Streamlit Cloud.
+MIT License © 2025 \[Lisha Angral]
