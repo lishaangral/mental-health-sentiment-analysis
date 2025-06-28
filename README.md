@@ -23,7 +23,7 @@ These sources provided diverse and labeled emotional data (stress, suicidal idea
 
 ## 🌐 Live App (Streamlit)
 
-> 🖱 Try it live here: [https://mental-health-sentiment-analysis.streamlit.app](https://mental-health-sentiment-analysis.streamlit.app)
+> 🖱 Try it live here: [https://mental-health-sentiment-analysis.streamlit.app](https://mental-health-sentiment-analysis.streamlit.app).
 > If an error occurs, just click the button again.
 
 ---
