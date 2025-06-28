@@ -4,7 +4,19 @@ A deep learning-powered mental health sentiment analysis tool that uses a fine-t
 
 ![Mental Health Sentiment Monitor](./preview.png)
 
-[Fine Tuned RoBERTa model deployed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
+[Fine tuned RoBERTa model on Kaggle Dataset deployed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
+[Additionlly Fine tuned version on Google Research Go Emotions Dataset](https://huggingface.co/lishaangral/roberta-mental-health-v2)
+
+## Datasets & Resources Used
+
+Fine-tuned on:
+
+* [Google Research Dataset | Go Emotions](https://huggingface.co/datasets/google-research-datasets/go_emotions)
+* [Kaggle: Sentiment Analysis for Mental Health](https://www.kaggle.com/datasets/suchintikasarkar/sentiment-analysis-for-mental-health)
+
+These sources provided diverse and labeled emotional data (stress, suicidal ideation, support-seeking, etc.) for supervised training.
+
+---
 
 ### 🌐 Use on Deployed App (Streamlit Cloud)
 
@@ -20,7 +32,7 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 
 ### Key Features
 
-- **91%+ Accuracy** on real-world clinical and social media mental health datasets
+- **97%+ Accuracy** on real-world clinical and social media mental health datasets
 - **Fine-tuned RoBERTa** model for emotion classification
 - Trained on **45,000+ labeled entries** from both clinical and anonymized social media sources
 - **Streamlit Dashboard** to visualize emotion predictions
@@ -94,16 +106,6 @@ Type your current thoughts or mood, and the model will show emotion labels like 
 
 ---
 
-## Datasets & Resources Used
-
-Fine-tuned on:
-
-* [The Diagnostic and Statistical Manual of Mental Disorders (DSM-5)](https://psychiatryonline.org/doi/book/10.1176/appi.books.9780890425787)
-* [Kaggle: Sentiment Analysis for Mental Health](https://www.kaggle.com/datasets/suchintikasarkar/sentiment-analysis-for-mental-health)
-
-These sources provided diverse and labeled emotional data (stress, suicidal ideation, support-seeking, etc.) for supervised training.
-
----
 ### Ethical Disclaimer
 
 This demo of fine tuned model is developed for **educational, reflective, and non-clinical purposes only**.

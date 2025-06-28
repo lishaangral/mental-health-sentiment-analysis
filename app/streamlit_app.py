@@ -1,72 +1,37 @@
 import streamlit as st
 from transformers import pipeline
+import torch
+import matplotlib.pyplot as plt
 
-# Load model
-model_name = "lishaangral/roberta-mental-health"
-classifier = pipeline("text-classification", model=model_name, tokenizer=model_name, framework="pt", truncation=True, max_length=512)
+# Set model name and device
+model_name = "lishaangral/roberta-mental-health-v2"
+device = 0 if torch.cuda.is_available() else -1
 
-# Extended subcategories based on prediction confidence
-subcategory_map = {
-    "Suicidal": [
-        (0.0, 0.2, "Vague Thoughts"),
-        (0.2, 0.4, "Negative Ideation"),
-        (0.4, 0.6, "Intense Hopelessness"),
-        (0.6, 0.8, "Severe Crisis Symptoms"),
-        (0.8, 1.0, "Critical Danger State")
-    ],
-    "Depression": [
-        (0.0, 0.2, "Mild Blues"),
-        (0.2, 0.4, "Emotional Fatigue"),
-        (0.4, 0.6, "Recurring Sadness"),
-        (0.6, 0.8, "Clinical Low"),
-        (0.8, 1.0, "Severe Depression Episode")
-    ],
-    "Anxiety": [
-        (0.0, 0.2, "Mild Tension"),
-        (0.2, 0.4, "Cognitive Worry"),
-        (0.4, 0.6, "Nervous Anticipation"),
-        (0.6, 0.8, "Panic Symptoms"),
-        (0.8, 1.0, "High Alert Anxiety")
-    ],
-    "Stress": [
-        (0.0, 0.2, "Everyday Pressure"),
-        (0.2, 0.4, "Task Overload"),
-        (0.4, 0.6, "Emotional Overwhelm"),
-        (0.6, 0.8, "Chronic Strain"),
-        (0.8, 1.0, "Severe Burnout Risk")
-    ],
-    "Normal": [
-        (0.0, 1.0, "What you're feeling is highly likely to be normal"),
-    ],
-    "Bi-Polar": [
-        (0.0, 0.3, "Mild Shifts"),
-        (0.3, 0.6, "Mood Inconsistencies"),
-        (0.6, 0.8, "Episode Suspected"),
-        (0.8, 1.0, "High-Risk Cycle Detected")
-    ],
-    "Personality Disorder": [
-        (0.0, 0.3, "Slight Behavioral Traits"),
-        (0.3, 0.6, "Pattern Recognition Needed"),
-        (0.6, 0.8, "Personality Indicators"),
-        (0.8, 1.0, "Strong Personality Deviance")
-    ]
-}
+# Initialize pipeline
+classifier = pipeline(
+    "text-classification",
+    model=model_name,
+    tokenizer=model_name,
+    device=device,
+    return_all_scores=True,
+    top_k=None,  # get all labels
+    truncation=True,
+    max_length=512
+)
 
-# UI Setup
+# Define label list in the correct order
+label_list = [
+    "Admiration", "Amusement", "Anger", "Annoyance", "Approval", "Caring", "Confusion", "Curiosity",
+    "Desire", "Disappointment", "Disapproval", "Disgust", "Embarrassment", "Excitement", "Fear",
+    "Gratitude", "Grief", "Joy", "Love", "Nervousness", "Optimism", "Pride", "Realization", "Relief",
+    "Remorse", "Sadness", "Surprise", "Neutral"
+]
+
+# Streamlit UI
 st.set_page_config(page_title="🌱 Mental Health Sentiment Analyzer", layout="centered")
-st.markdown("""
-    <style>
-        .stApp {
-            font-family: 'Segoe UI', sans-serif;]
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# App Title and Description
 st.title("🌿 Mental Health Sentiment Analyzer")
 st.markdown("""
-This tool helps you reflect on your current emotional state using an AI model trained on real mental health conversations.  
-Type your feelings below. The app will detect your emotion and break it down into finer emotional nuances.
+This tool analyzes the emotional tone in your writing and shows you a breakdown of emotions detected by the model.
 
 🔒 <i>Your input is not saved or shared.</i>
 """, unsafe_allow_html=True)
@@ -77,23 +42,31 @@ user_input = st.text_area("How are you feeling today?", height=150)
 # Analyze Button
 if st.button("🩺 Analyze My Emotions"):
     if user_input.strip():
-        results = classifier(user_input)
-        st.subheader("🧾 Full Emotion Report")
+        results = classifier(user_input)[0]  # Get list of dicts for each label
 
-        for res in results:
-            label = res['label']
-            score = res['score']
-            percentage = score * 100
+        # Extract scores
+        scores = [entry['score'] for entry in results]
 
-            # Find subcategory
-            subclass = "Uncertain"
-            for lower, upper, sub in subcategory_map.get(label, []):
-                if lower <= score < upper:
-                    subclass = sub
-                    break
+        # Sort labels and scores by score descending
+        sorted_data = sorted(zip(label_list, scores), key=lambda x: x[1], reverse=True)
+        top_labels, top_scores = zip(*sorted_data)
 
-            st.markdown(f"**Primary Emotion:** `{label}` ({percentage:.2f}%)")
-            st.markdown(f"**Subcategory:** {subclass}")
-            st.markdown("---")
+        # Show full emotion chart
+        st.subheader("Emotional Composition")
+        fig, ax = plt.subplots(figsize=(10, 8))
+        ax.barh(top_labels, top_scores, color='skyblue')
+        ax.invert_yaxis()
+        ax.set_xlabel("Confidence Score")
+        ax.set_title("Detected Emotional Breakdown")
+        st.pyplot(fig)
+
+        # Optionally: also show high-confidence emotions (>0.3)
+        st.subheader("Strongest Emotions Detected (Score > 30%)")
+        strong = [(label, f"{score*100:.2f}%") for label, score in sorted_data if score > 0.3]
+        if strong:
+            for label, score in strong:
+                st.markdown(f"- **{label.title()}**: {score}")
+        else:
+            st.info("No dominant emotional signals detected.")
     else:
         st.warning("Please enter some thoughts to analyze.")
