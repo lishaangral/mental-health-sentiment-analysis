@@ -18,6 +18,12 @@ classifier = pipeline(
     truncation=True,
     max_length=512
 )
+label_list = [
+    "Admiration", "Amusement", "Anger", "Annoyance", "Approval", "Caring", "Confusion", "Curiosity",
+    "Desire", "Disappointment", "Disapproval", "Disgust", "Embarrassment", "Excitement", "Fear",
+    "Gratitude", "Grief", "Joy", "Love", "Nervousness", "Optimism", "Pride", "Realization", "Relief",
+    "Remorse", "Sadness", "Surprise", "Neutral"
+]
 
 # Streamlit UI
 st.set_page_config(page_title="🌱 Mental Health Sentiment Analyzer", layout="centered")
@@ -36,12 +42,15 @@ if st.button("🩺 Analyze My Emotions"):
     if user_input.strip():
         results = classifier(user_input)[0]  # Get list of dicts for each label
 
-        # Extract label-score mapping and sort
-        sentiment_scores = {entry['label'].title(): entry['score'] for entry in results}
+        # Map raw labels like "LABEL_18" to human-readable labels from label_list
+        sentiment_scores = {
+            label_list[int(entry['label'].split("_")[-1])]: entry['score']
+            for entry in results
+        }
+
         sorted_data = sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)
         top_labels, top_scores = zip(*sorted_data)
 
-        # Optionally: show strong signals
         st.subheader("Strongest Emotions Detected (Score > 30%)")
         strong = [(label, f"{score * 100:.2f}%") for label, score in sorted_data if score > 0.3]
         if strong:
@@ -50,10 +59,9 @@ if st.button("🩺 Analyze My Emotions"):
         else:
             st.info("No dominant emotional signals detected.")
 
-        # Show composition chart
         if st.button("📊 Show Sentiment Composition Chart"):
             with st.spinner("Generating chart..."):
-                top_n = 10  # Show top 10 emotions
+                top_n = 10
                 top_scores_dict = dict(sorted_data[:top_n])
 
                 fig, ax = plt.subplots()
@@ -62,6 +70,3 @@ if st.button("🩺 Analyze My Emotions"):
                 ax.set_xlabel('Score')
                 ax.set_title('Top 10 Emotion Probabilities')
                 st.pyplot(fig)
-
-    else:
-        st.warning("Please enter some thoughts to analyze.")
