@@ -51,7 +51,9 @@ if st.button("🩺 Analyze My Emotions"):
         sorted_data = sorted(zip(label_list, scores), key=lambda x: x[1], reverse=True)
         top_labels, top_scores = zip(*sorted_data)
 
-        with st.spinner("Generating chart..."):
+    # Visualize top sentiments
+if st.button("📊 Show Sentiment Composition Chart"):
+    with st.spinner("Generating chart..."):
         sentiment_scores = {entry['label'].title(): entry['score'] for entry in results}
 
         sorted_scores = dict(sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)[:10])
@@ -73,4 +75,3 @@ if st.button("🩺 Analyze My Emotions"):
             st.info("No dominant emotional signals detected.")
     else:
         st.warning("Please enter some thoughts to analyze.")
-
