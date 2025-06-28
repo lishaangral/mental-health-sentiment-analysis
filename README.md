@@ -2,7 +2,10 @@
 
 A deep learning-powered mental health sentiment analysis tool that uses a fine-tuned RoBERTa model to classify emotional states such as **Depression**, **Anxiety**, **Suicidal thoughts**, **Stress**, **Bi-Polar**, **Personality Disorder**, and **Normal**. Built with NLP best practices and deployed through an interactive Streamlit web app.
 
-![Mental Health Sentiment Monitor](./preview.png)
+<p align="center">
+  <img src="./preview.png" alt="Mental Health Sentiment Analysis" width="45%" style="margin-right: 10px;">
+  <img src="./chart.png" alt="Sentiment Composition Chart" width="45%">
+</p>
 
 [Fine tuned RoBERTa model on Kaggle Dataset deployed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
 [Additionlly Fine tuned version on Google Research Go Emotions Dataset](https://huggingface.co/lishaangral/roberta-mental-health-v2)
@@ -18,9 +21,9 @@ These sources provided diverse and labeled emotional data (stress, suicidal idea
 
 ---
 
-### 🌐 Use on Deployed App (Streamlit Cloud)
+## 🌐 Live App (Streamlit)
 
-> Visit the hosted URL [Streamlit Link](https://mental-health-sentiment-analysis.streamlit.app/)
+> 🖱 Try it live here: [https://mental-health-sentiment-analysis.streamlit.app](https://mental-health-sentiment-analysis.streamlit.app)
 
 ---
 
@@ -33,6 +36,8 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 ### Key Features
 
 - **97%+ Accuracy** on real-world clinical and social media mental health datasets
+- **Visual insights** via matplotlib-powered bar charts
+- Detects both **dominant mental states** and **underlying emotional tones**
 - **Fine-tuned RoBERTa** model for emotion classification
 - Trained on **45,000+ labeled entries** from both clinical and anonymized social media sources
 - **Streamlit Dashboard** to visualize emotion predictions
@@ -63,7 +68,7 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 | **Streamlit**                     | Interactive UI to collect and display sentiment predictions   |
 | **NLTK**                          | Natural Language Toolkit for preprocessing psychological text |
 | **Pandas**                        | Data handling and transformation                              |
-
+| **Matplotlib**                    | For sentiment bar chart visualization                         |
 ---
 
 ### How to Use
@@ -100,7 +105,6 @@ Type your current thoughts or mood, and the model will show emotion labels like 
 * **Fine-tune on Psychology Textbooks**: Expand the dataset by incorporating structured clinical content from DSM-5, psychology manuals, and academic books.
 * **Emotion Trend Tracker**: Track user emotion patterns over time using local storage or optional login-based persistence.
 * **Custom Alerts**: Notify users of critical emotional thresholds and suggest emergency contacts/resources.
-* **Multi-class Emotion Detection**: Extend classification to include emotions like *Guilt, Shame, Joy, Loneliness, Anger* using emotion wheel principles.
 * **Speech & OCR Input**: Accept voice and screenshot inputs to expand beyond typed interaction.
 * **Multilingual Support**: Include support for Hindi, Spanish, and other major languages.
 
