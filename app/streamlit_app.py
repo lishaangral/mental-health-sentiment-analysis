@@ -56,7 +56,7 @@ if st.button("🩺 Analyze My Emotions"):
             if user_input.strip():
                 with st.spinner("Analyzing..."):
                     inputs = tokenizer(user_input, return_tensors="pt", truncation=True, max_length=512)
-                    outputs = model(**inputs)
+                    outputs = model_name(**inputs)
                     scores = torch.softmax(outputs.logits[0], dim=0).detach().numpy()
 
                     sentiment_scores = {label_list[i]: scores[i] for i in range(len(label_list))}
