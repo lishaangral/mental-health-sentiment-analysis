@@ -51,23 +51,17 @@ if st.button("🩺 Analyze My Emotions"):
         sorted_data = sorted(zip(label_list, scores), key=lambda x: x[1], reverse=True)
         top_labels, top_scores = zip(*sorted_data)
 
-       # Visualize top sentiments
-        if st.button("📊 Show Sentiment Composition Chart"):
-            if user_input.strip():
-                with st.spinner("Analyzing..."):
-                    inputs = tokenizer(user_input, return_tensors="pt", truncation=True, max_length=512)
-                    outputs = model_name(**inputs)
-                    scores = torch.softmax(outputs.logits[0], dim=0).detach().numpy()
+        with st.spinner("Generating chart..."):
+        sentiment_scores = {entry['label'].title(): entry['score'] for entry in results}
 
-                    sentiment_scores = {label_list[i]: scores[i] for i in range(len(label_list))}
-                    sorted_scores = dict(sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)[:10])
+        sorted_scores = dict(sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)[:10])
 
-                    fig, ax = plt.subplots()
-                    ax.barh(list(sorted_scores.keys()), list(sorted_scores.values()), color='skyblue')
-                    ax.invert_yaxis()
-                    ax.set_xlabel('Score')
-                    ax.set_title('Top 10 Emotion Probabilities')
-                    st.pyplot(fig)
+        fig, ax = plt.subplots()
+        ax.barh(list(sorted_scores.keys()), list(sorted_scores.values()), color='skyblue')
+        ax.invert_yaxis()
+        ax.set_xlabel('Score')
+        ax.set_title('Top 10 Emotion Probabilities')
+        st.pyplot(fig)
 
         # Optionally: also show high-confidence emotions (>0.3)
         st.subheader("Strongest Emotions Detected (Score > 30%)")
@@ -79,3 +73,4 @@ if st.button("🩺 Analyze My Emotions"):
             st.info("No dominant emotional signals detected.")
     else:
         st.warning("Please enter some thoughts to analyze.")
+
