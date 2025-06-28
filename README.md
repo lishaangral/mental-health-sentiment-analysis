@@ -7,12 +7,12 @@ A deep learning-powered mental health sentiment analysis tool that uses a fine-t
   <img src="./chart.png" alt="Sentiment Composition Chart" width="45%">
 </p>
 
-[Fine tuned RoBERTa model on Kaggle Dataset deployed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
-[Additionlly Fine tuned version on Google Research Go Emotions Dataset](https://huggingface.co/lishaangral/roberta-mental-health-v2)
-
 ## Datasets & Resources Used
 
 Fine-tuned on:
+
+[Fine tuned RoBERTa model on Kaggle Dataset deployed on HuggingFace](https://huggingface.co/lishaangral/roberta-mental-health)
+[Additionlly Fine tuned version on Google Research Go Emotions Dataset](https://huggingface.co/lishaangral/roberta-mental-health-v2)
 
 * [Google Research Dataset | Go Emotions](https://huggingface.co/datasets/google-research-datasets/go_emotions)
 * [Kaggle: Sentiment Analysis for Mental Health](https://www.kaggle.com/datasets/suchintikasarkar/sentiment-analysis-for-mental-health)
