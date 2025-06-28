@@ -14,10 +14,12 @@ classifier = pipeline(
     tokenizer=model_name,
     device=device,
     return_all_scores=True,
-    top_k=None,  # get all labels
+    top_k=None,
     truncation=True,
     max_length=512
 )
+
+# Label list (capitalized)
 label_list = [
     "Admiration", "Amusement", "Anger", "Annoyance", "Approval", "Caring", "Confusion", "Curiosity",
     "Desire", "Disappointment", "Disapproval", "Disgust", "Embarrassment", "Excitement", "Fear",
@@ -25,7 +27,7 @@ label_list = [
     "Remorse", "Sadness", "Surprise", "Neutral"
 ]
 
-# Streamlit UI
+# UI
 st.set_page_config(page_title="🌱 Mental Health Sentiment Analyzer", layout="centered")
 st.title("🌿 Mental Health Sentiment Analyzer")
 st.markdown("""
@@ -34,39 +36,40 @@ This tool analyzes the emotional tone in your writing and shows you a breakdown 
 🔒 <i>Your input is not saved or shared.</i>
 """, unsafe_allow_html=True)
 
-# Text Input
 user_input = st.text_area("How are you feeling today?", height=150)
 
-# Analyze Button
-if st.button("🩺 Analyze My Emotions"):
+if st.button("🩺 Analyze Emotions & Show Chart"):
     if user_input.strip():
-        results = classifier(user_input)[0]  # Get list of dicts for each label
+        with st.spinner("Analyzing..."):
+            results = classifier(user_input)[0]
 
-        # Map raw labels like "LABEL_18" to human-readable labels from label_list
-        sentiment_scores = {
-            label_list[int(entry['label'].split("_")[-1])]: entry['score']
-            for entry in results
-        }
+            # Map "LABEL_x" to actual emotion
+            sentiment_scores = {
+                label_list[int(entry["label"].split("_")[-1])]: entry["score"]
+                for entry in results
+            }
 
-        sorted_data = sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)
-        top_labels, top_scores = zip(*sorted_data)
+            # Sort scores
+            sorted_data = sorted(sentiment_scores.items(), key=lambda x: x[1], reverse=True)
 
-        st.subheader("Strongest Emotions Detected (Score > 30%)")
-        strong = [(label, f"{score * 100:.2f}%") for label, score in sorted_data if score > 0.3]
-        if strong:
-            for label, score in strong:
-                st.markdown(f"- **{label}**: {score}")
-        else:
-            st.info("No dominant emotional signals detected.")
+            # Show strong emotions
+            st.subheader("Strongest Emotions Detected (Score > 30%)")
+            strong = [(label, f"{score * 100:.2f}%") for label, score in sorted_data if score > 0.3]
+            if strong:
+                for label, score in strong:
+                    st.markdown(f"- **{label}**: {score}")
+            else:
+                st.info("No dominant emotional signals detected.")
 
-        if st.button("📊 Show Sentiment Composition Chart"):
-            with st.spinner("Generating chart..."):
-                top_n = 10
-                top_scores_dict = dict(sorted_data[:top_n])
+            # Show chart
+            st.subheader("📊 Sentiment Composition Chart (Top 10)")
+            top_scores_dict = dict(sorted_data[:10])
+            fig, ax = plt.subplots()
+            ax.barh(list(top_scores_dict.keys()), list(top_scores_dict.values()), color='skyblue')
+            ax.invert_yaxis()
+            ax.set_xlabel("Score")
+            ax.set_title("Top 10 Emotion Probabilities")
+            st.pyplot(fig)
 
-                fig, ax = plt.subplots()
-                ax.barh(list(top_scores_dict.keys()), list(top_scores_dict.values()), color='skyblue')
-                ax.invert_yaxis()
-                ax.set_xlabel('Score')
-                ax.set_title('Top 10 Emotion Probabilities')
-                st.pyplot(fig)
+    else:
+        st.warning("Please enter some text to analyze.")
