@@ -45,7 +45,7 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 - Psychological **text preprocessing** using NLTK (removal of negation bias, stemming, and affective filters)
 - *No input is stored or shared* – privacy-focused interaction
 
-## Emotion Classes
+<!-- ## Emotion Classes
 
 | Label                | Description                                                                 |
 |---------------------|-----------------------------------------------------------------------------|
@@ -57,7 +57,7 @@ Mental health issues often go unnoticed in plain text. This project uses state-o
 | Bi-Polar            | Indications of extreme mood swings or instability                           |
 | Personality Disorder| Identity disturbances, unstable interpersonal relationships, erratic moods |
 
----
+--- -->
 
 ### 🛠️ Tech Stack
 
