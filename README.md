@@ -1,6 +1,6 @@
 # Mental Health Sentiment Analysis Project
 
-A deep learning-powered mental health sentiment analysis tool that uses a fine-tuned RoBERTa model to classify emotional states such as **Depression**, **Anxiety**, **Suicidal thoughts**, **Stress**, **Bi-Polar**, **Personality Disorder**, and **Normal**. Built with NLP best practices and deployed through an interactive Streamlit web app.
+A deep learning-powered mental health sentiment analysis tool that uses a fine-tuned RoBERTa model to classify emotional states according to the classes given in **GoEmotions** dataset. Built with NLP best practices and deployed through an interactive Streamlit web app.
 
 <p align="center">
   <img src="./preview.png" alt="Mental Health Sentiment Analysis" width="45%" style="margin-right: 10px;">
