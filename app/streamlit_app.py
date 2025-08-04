@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 model_name = "lishaangral/roberta-mental-health-v2"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
+model = AutoModelForSequenceClassification.from_pretrained(model_name, device_map=None)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Initialize pipeline
@@ -15,7 +15,7 @@ classifier = pipeline(
     "text-classification",
     model=model,
     tokenizer=tokenizer,
-    device=0 if device == "cuda" else -1,
+    device=-1,  # -1 forces CPU in pipeline
     return_all_scores=True
 )
 
