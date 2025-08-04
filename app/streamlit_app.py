@@ -1,18 +1,21 @@
 import streamlit as st
-from transformers import pipeline
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
 import torch
 import matplotlib.pyplot as plt
 
 # Set model name and device
 model_name = "lishaangral/roberta-mental-health-v2"
-device = 0 if torch.cuda.is_available() else -1
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Initialize pipeline
 classifier = pipeline(
     "text-classification",
-    model=model_name,
-    tokenizer=model_name,
-    device=device,
+    model=model,
+    tokenizer=tokenizer,
+    device=0 if device == "cuda" else -1,
     return_all_scores=True
 )
 
